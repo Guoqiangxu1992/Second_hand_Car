@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.manager.dao.BuyInfoDao">
+	<resultMap type="com.xu.manager.bean.Car" id="CarMap">
+		<id property="id" column="id"></id>
+		<result property="carType" column="car_type"  />
+		<result property="mileage" column="mileage"></result>
+		<result property="price" column="price"  />
+		<result property="agency" column="agency"></result>
+		<result property="status" column="status"  />
+		<result property="contractPrice" column="contract_price"></result>
+		<result property="imag" column="imag"  />
+		<result property="color" column="color"  />
+		<result property="startPrice" column="start_price"  />
+		<result property="endPrice" column="end_price"  />
+		<result property="damaged" column="damaged"  />
+	</resultMap>
+
+	<!-- 初始化显示 -->
+	<select id="query"  resultMap="CarMap">
+		SELECT * from td_car b 
+	  <include refid="searchCondition"></include> 
+	  order by submit_time desc
+	</select>
+	
+	<!-- 查询有多少条数据 -->
+	<select id="countAll"  resultType="int">
+		<![CDATA[ 
+		SELECT count(*) from td_car
+		]]>
+	</select>
+<!-- 查询条件 -->
+	<sql id="searchCondition">
+		<where>
+			 <if test="query.carType != null and query.carType!=''">
+				and b.car_type like "%"#{query.carType}"%"
+			</if>
+		 	<if test="query.color != null and query.color!=''">
+				and b.color like "%"#{query.color}"%"
+			</if>
+			<if test="query.mileage != null and query.mileage!=''">
+			 <![CDATA[ 
+				and b.mileage<=#{query.mileage}
+				]]>
+			</if>  
+			<if test="query.damaged != null and query.damaged!=''">
+			 <![CDATA[ 
+				and b.damaged=#{query.damaged}
+				]]>
+			</if> 
+				<if test="query.startPrice != null and query.startPrice!=''">
+			 <![CDATA[ 
+				and b.price>=#{query.startPrice}
+				]]>
+			</if> 
+				<if test="query.endPrice!= null and query.startPrice!=''">
+			 <![CDATA[ 
+				and b.price<=#{query.endPrice}
+				]]>
+			</if> 
+		</where>
+	</sql>
+	
+	
+
+	</mapper>

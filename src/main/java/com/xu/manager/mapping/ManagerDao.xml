@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.manager.dao.ManagerDao">
+	<resultMap type="com.xu.manager.bean.Order" id="OrderMap">
+		<id property="id" column="id"></id>
+		<result property="carType" column="car_type"  />
+		<result property="orderNum" column="order_num"  />
+		<result property="mileage" column="mileage"></result>
+		<result property="price" column="price"  />
+		<result property="agency" column="agency"></result>
+		<result property="status" column="status"  />
+		<result property="contractPrice" column="contract_price"></result>
+		<result property="imag" column="imag"  />
+		<result property="color" column="color"  />
+		<result property="time" column="time"  />
+		<result property="buyer" column="buyer"  />
+		<result property="mobile" column="mobile"  />
+		<result property="old" column="old"  />
+		<result property="userId" column="user_id"  />
+		<result property="completeTime" column="complete_time"  />
+		
+	</resultMap>
+	
+	<insert id="insert"  parameterType="com.xu.manager.bean.Order">
+		insert into td_order(id,car_type,mileage,price,agency,status,old,color,order_num,time,buyer,mobile,imag,contract_price,user_id)
+		values(
+		#{id},
+		#{carType},
+		#{mileage},
+		#{price},
+		#{agency},
+		#{status},
+		#{old},
+		#{color},
+		#{orderNum},
+		#{time},
+		#{buyer},
+		#{mobile},
+		#{imag},
+		#{contractPrice},
+		#{userId}
+		
+		) 
+			<!--  <include refid="searchCondition"></include>  -->
+	</insert>
+		<!-- 购物车显示 -->
+		<select id="query"  resultMap="OrderMap">
+		SELECT * from td_order b 
+	 <include refid="searchCondition"></include> 
+	   order by complete_time DESC
+	    
+	</select>
+<!-- 查询条件 -->
+	<sql id="searchCondition">
+		<where>
+		  
+			<if test="query.carType != null">
+				and b.car_type like "%"#{query.carType}"%"
+			</if>
+		</where>
+	</sql>
+</mapper> 

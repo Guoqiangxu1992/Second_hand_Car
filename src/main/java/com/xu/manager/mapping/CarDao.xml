@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.manager.dao.CarDao">
+	<resultMap type="com.xu.manager.bean.Car" id="CarMap">
+		<id property="id" column="id"></id>
+		<result property="carType" column="car_type"  />
+		<result property="mileage" column="mileage"></result>
+		<result property="price" column="price"  />
+		<result property="agency" column="agency"></result>
+		<result property="status" column="status"  />
+		<result property="contractPrice" column="contract_price"></result>
+		<result property="imag" column="imag"  />
+		<result property="color" column="color"  />
+		<result property="agencyId" column="agency_id"  />
+		<result property="submitTime" column="submit_time"  />
+		<result property="damaged" column="damaged"  />
+	</resultMap>
+	
+	<!-- 初始化显示 -->
+	<select id="query"  resultMap="CarMap">
+		SELECT * from td_car b 
+			 <include refid="searchCondition"></include> 
+			 order by submit_time desc
+	</select>
+	
+	<!-- 初始化显示 -->
+	<select id="queryList"  resultMap="CarMap">
+		SELECT * from td_car b 
+			 <include refid="searchCondition3"></include> 
+	</select>
+	
+	<!-- 初始化显示 -->
+	<select id="queryAllList"  resultMap="CarMap">
+		SELECT * from td_car b
+		 <include refid="searchCondition4"></include>
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="searchCondition3">
+		<where>
+			<if test="query.agencyId != null">
+				and b.agency_id = #{query.agencyId}
+			</if>
+			<if test="query.carType != null">
+				and b.car_type = #{query.carType}
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 查询条件 -->
+	<sql id="searchCondition4">
+		<where>
+			<if test="query.carType != null">
+				and b.car_type like "%"#{query.carType}"%"
+			</if>
+		</where>
+	</sql>
+	
+	<!-- 查询有多少条数据 -->
+	<select id="countAll"  resultType="int">
+		<![CDATA[ 
+		SELECT count(*) from td_car
+		]]>
+	</select>
+<!-- 查询条件 -->
+	<sql id="searchCondition">
+		<where>
+			<if test="query.carType != null">
+				and b.car_type like "%"#{query.carType}"%"
+			</if>
+			<!--<if test="query.color != null">
+				and b.color like "%"#{query.color}"%"
+			</if>
+			 <if test="query.old != null">
+				and b.old like "%"#{query.old}"%"
+			</if>
+			<if test="query.mileage != null">
+				and b.mileage like "%"#{query.mileage}"%"
+			</if> -->
+			
+		</where>
+	</sql>
+	
+		<!-- 插入数据 -->
+	 <update id="saveImag" parameterType="com.xu.manager.bean.Car">
+         update td_car
+         <set>
+             imag=#{fileName}
+         
+         </set>		
+         where id = #{id}
+	</update> 
+	
+	<insert id="saveCar"  parameterType="com.xu.manager.bean.Car">
+		insert into td_car(id,car_type,mileage,price,agency,status,old,color,agency_id,submit_time,damaged)
+		values(
+		#{id},
+		#{carType},
+		#{mileage},
+		#{price},
+		#{agency},
+		#{status},
+		#{old},
+		#{color},
+		#{agencyId},
+		#{submitTime},
+		#{damaged}
+		) 
+			<!--  <include refid="searchCondition"></include>  -->
+	</insert>
+	
+	<!-- 删除 -->
+	<delete id="deleteMore" >
+		<foreach collection="list" item="id" index="idx"  open="" close=";" separator=";">
+			delete from td_car where id=${id}
+		</foreach>
+	</delete>
+	
+	<!-- 修改时候 -->
+	<select id="getById"  resultMap="CarMap">
+		SELECT * from td_car where id = #{id}
+	</select>
+	
+		<update id="update" parameterType="com.xu.manager.bean.Car">
+		update td_car
+		 <set>
+			 car_type=#{carType},
+			 mileage=#{mileage},
+			 price=#{price},
+			 old = #{old},
+			 color = #{color},
+			 agency = #{agency}
+		 </set>
+		WHERE id = #{id}
+	</update>
+	
+			<update id="updateStatus" parameterType="com.xu.manager.bean.Car">
+		update td_car
+		 <set>
+			 status = 2
+		 </set>
+		WHERE id = #{id}
+	</update>
+</mapper> 

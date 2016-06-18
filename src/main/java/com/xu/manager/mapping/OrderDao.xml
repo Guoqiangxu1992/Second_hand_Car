@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.manager.dao.OrderDao">
+	<resultMap type="com.xu.manager.bean.Order" id="OrderMap">
+		<id property="id" column="id"></id>
+		<result property="carType" column="car_type"  />
+		<result property="orderNum" column="order_num"  />
+		<result property="mileage" column="mileage"></result>
+		<result property="price" column="price"  />
+		<result property="agency" column="agency"></result>
+		<result property="status" column="status"  />
+		<result property="contractPrice" column="contract_price"></result>
+		<result property="imag" column="imag"  />
+		<result property="color" column="color"  />
+		<result property="orderTime" column="order_time"  />
+		<result property="completeTime" column="complete_time"  />
+		<result property="buyer" column="buyer"  />
+		<result property="mobile" column="mobile"  />
+		<result property="old" column="old"  />
+		<result property="userId" column="user_id"  />
+		<result property="agencyId" column="agency_id"  />
+		
+	</resultMap>
+	
+	<insert id="insert"  parameterType="com.xu.manager.bean.Order">
+		insert into td_order(id,car_type,mileage,price,agency,status,old,color,order_num,order_time,buyer,mobile,imag,contract_price,user_id,agency_id,complete_time)
+		values(
+		#{id},
+		#{carType},
+		#{mileage},
+		#{price},
+		#{agency},
+		#{status},
+		#{old},
+		#{color},
+		#{orderNum},
+		#{orderTime},
+		#{buyer},
+		#{mobile},
+		#{imag},
+		#{contractPrice},
+		#{userId},
+		#{agencyId},
+		#{completeTime}
+		
+		) 
+			<!--  <include refid="searchCondition"></include>  -->
+	</insert>
+		<!-- 购物车显示 -->
+		<select id="queryShopping"  resultMap="OrderMap">
+		SELECT * from td_order b 
+	  <include refid="searchCondition"></include> 
+	</select>
+<!-- 查询条件 -->
+	<sql id="searchCondition">
+		<where>
+			<if test="query.userId != null">
+				and b.user_id =#{query.userId}
+			</if>
+			
+		</where>
+	</sql>
+	
+		<select id="listOrder"  resultMap="OrderMap">
+		SELECT * from td_order b 
+	   <include refid="searchCondition1"></include> 
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="searchCondition1">
+		<where>
+			<if test="query.agencyId != null">
+			     and status = 2
+				and b.agency_id =#{query.agencyId}
+			</if>
+		</where>
+	</sql>
+	<!-- 商家同意卖出更改车的状态 -->
+	<update id="updateStatus">
+	    update td_order a
+	    set a.status = 3
+	    ,a.complete_time = #{Date}
+	    where a.id = #{id}
+	
+	</update>
+	<!-- 商家不同意 -->
+	<update id="updateStatus1">
+	    update td_order a
+	    set a.status = 1
+	    where a.id = #{id}
+	
+	</update>
+	
+	<delete id="delete">
+	   delete from td_order
+	   where id = #{id}
+	
+	</delete>
+	
+	<update id="updateStatusCar">
+	    update td_car a
+	    set a.status = 1
+	    where a.id = #{id}
+	
+	</update>
+	
+	<!-- 查询已经处理的订单 -->
+	<select id="dealOrdered"  resultMap="OrderMap">
+		SELECT * from td_order b 
+	   <include refid="searchCondition2"></include> 
+	</select>
+	
+		<!-- 查询条件 -->
+	<sql id="searchCondition2">
+		<where>
+			<if test="query.agencyId != null">
+			     and status = 3
+				and b.agency_id =#{query.agencyId}
+			</if>
+		</where>
+	</sql>
+	
+	<delete id="deleteCar">
+	   delete from td_car
+	   where id = #{id}
+	
+	</delete>
+</mapper> 

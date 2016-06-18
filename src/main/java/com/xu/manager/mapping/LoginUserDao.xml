@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.manager.dao.LoginUserDao">
+	<resultMap type="com.xu.manager.bean.LoginUser" id="LoginUserMap">
+		<id property="id" column="id"></id>
+		<result property="userId" column="user_id"  />
+		<result property="roleId" column="role_id"></result>
+		<result property="userName" column="user_name"  />
+		<result property="fullName" column="full_name"></result>
+		<result property="passWord" column="passWord"  />
+		<result property="sex" column="sex"></result>
+		<result property="birthday" column="birthday"  />
+		<result property="mobile" column="mobile"></result>
+	</resultMap>
+	
+	
+	<select id="getByUserName"  resultMap="LoginUserMap">
+		<![CDATA[ 
+		SELECT * from td_login_user WHERE user_name = #{userName}
+		]]>
+	</select>
+	
+	
+</mapper> 

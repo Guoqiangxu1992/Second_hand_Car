@@ -1,0 +1,4 @@
+#Tomcat publish data
+#Mon Jan 11 00:24:48 CST 2016
+org.eclipse.jst.j2ee.server\:HotelManager=D\:\\Program Files (x86)\\apache-tomcat-7.0.52\\webapps\\HotelManager
+org.eclipse.jst.j2ee.server\:/binary\:C\:\\Users\\summer\\.m2\\repository\\org\\springframework\\spring-web\\4.1.6.RELEASE\\spring-web-4.1.6.RELEASE.jar=D\:\\Program Files (x86)\\apache-tomcat-7.0.52\\webapps\\HotelManager\\WEB-INF\\lib\\spring-web-4.1.6.RELEASE.jar

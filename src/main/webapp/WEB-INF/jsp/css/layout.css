@@ -1,0 +1,219 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Micsoft YaHei";
+}
+img{
+    border: none;
+}
+input{
+    border: none;
+}
+.wrap {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    /*background-color: lightskyblue;*/
+}
+.container{
+    width: 600px;
+    height: 300px;
+    background: rgba(255,255,255,.5);
+    border-radius: 15px;
+    margin:0 auto ;
+    /*border: 2px solid #808080;*/
+    /*position: relative;*/
+    position: absolute;
+    left: 35%;
+    top: 20%;
+}
+/*.box-shadow-1{*/
+/*-webkit-box-shadow: 4px 4px 4px;*/
+/*-moz-box-shadow: 4px 4px 4px;*/
+/*box-shadow: 4px 4px 4px ;*/
+/*}*/
+/*.box-shadow-1{*/
+/*-webkit-box-shadow:0 0 10px rgba(200, 204, 204, .5);*/
+/*-moz-box-shadow:0 0 10px rgba(200, 204, 204, .5);*/
+/*box-shadow:0 0 10px rgba(200, 204, 204, .5);*/
+/*}*/
+.box-shadow-1{
+    -webkit-box-shadow:inset 0 0 10px #000;
+    -moz-box-shadow:inset 0 0 10px #000;
+    box-shadow:inset 0 0 10px #000;
+}
+.header{
+    width: 600px;
+    height: 50px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: rgba(255,255,255,.3);
+    /*position: absolute;*/
+    left: 0;
+    top: 0;
+}
+.title{
+    color: #555;
+    font-size: 20px;
+    padding-left: 20px;
+    line-height: 50px;
+    font-weight: bolder;
+
+}
+form{
+    width: 100%;
+    height: auto;
+    /*position: absolute;*/
+    left: 0;
+    top: 50px;
+}
+.fd{
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-top: 30px;
+}
+.p1{
+    width: 100px;
+    font-size: 18px;
+    color: #444;
+    float: left;
+    line-height: 40px;
+    font-weight: bold;
+    text-align: right;
+
+}
+
+.user_info{
+    width: 300px;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 28px;
+    border: 1px solid #808080;
+    border-radius: 3px;
+    float: left;
+    font-size: 14px;
+    color: #333;
+}
+.user{
+    background: url("../images/user.png") no-repeat 5px center #fff;
+}
+
+.pwd{
+    background: url("../images/psd.png") no-repeat 5px center #fff;
+}
+.btn{
+    width: 330px;
+    height: 40px;
+    line-height: 40px;
+    font-size:18px;
+    margin-left: 100px;
+    margin-top: 30px;
+    background: rgba(255,255,255,.5);
+    letter-spacing: 20px;
+    text-align: center;
+    border-radius: 3px;
+
+}
+
+input:hover{
+    border: 1px solid #f00;
+}
+select:hover{
+    border: 1px solid #f00;
+}
+
+
+/*************************ÂÖ²¥Í¼Æ¬ÑùÊ½  ¿ªÊ¼********************/
+.flexslider {
+    margin: 0 auto;
+    position: relative;
+    width:100%;
+    height: 800px;
+    overflow: hidden;
+    zoom: 1;
+}
+.flexslider .slides li {
+    width: 100%;
+    height: 100%;
+}
+
+.flex-direction-nav a {
+    width: 70px;
+    height: 70px;
+    line-height: 99em;
+    overflow: hidden;
+    margin: -35px 0 0;
+    display: block;
+    background: url('../images/ad_ctr.png') no-repeat;
+    position: absolute;
+    top: 50%;
+    z-index: 10;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transition: all .3s ease;
+    border-radius: 35px;
+}
+
+.flex-direction-nav .flex-next {
+    background-position: 0 -70px;
+    right: 0;
+}
+
+.flex-direction-nav .flex-prev {
+    left: 0;
+}
+
+.flexslider:hover .flex-next {
+    opacity: 0.8;
+    filter: alpha(opacity=25);
+}
+
+.flexslider:hover .flex-prev {
+    opacity: 0.8;
+    filter: alpha(opacity=25);
+}
+
+.flexslider:hover .flex-next:hover,
+.flexslider:hover .flex-prev:hover {
+    opacity: 1;
+    filter: alpha(opacity=50);
+}
+
+.flex-control-nav {
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+}
+
+.flex-control-nav li {
+    margin: 0 2px;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+
+.flex-control-paging li a {
+    background: url('../images/dot.png') no-repeat 0 -16px;
+    display: block;
+    height: 16px;
+    overflow: hidden;
+    text-indent: -99em;
+    width: 16px;
+    cursor: pointer;
+}
+
+.flex-control-paging li a.flex-active,
+.flex-control-paging li.active a {
+    background-position: 0 0;
+}
+
+.flexslider .slides a img {
+    width: 100%;
+    height: 800px;
+    display: block;
+}
+/******************************ÂÖ²¥Í¼  ½áÊø***************************/
+
